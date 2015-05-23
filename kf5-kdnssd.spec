@@ -1,8 +1,5 @@
 # TODO:
 # - runtime Requires if any
-# - these dirs are not own by any package
-#  /usr/include/KF5
-#  /usr/share/kf5
 %define		kdeframever	5.10
 %define		qtver		5.3.2
 %define		kfname		kdnssd
@@ -10,7 +7,7 @@
 Summary:	Network service discovery using Zeroconf
 Name:		kf5-%{kfname}
 Version:	5.10.0
-Release:	0.1
+Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
