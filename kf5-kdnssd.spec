@@ -1,17 +1,17 @@
 # TODO:
 # - runtime Requires if any
-%define		kdeframever	5.90
+%define		kdeframever	5.91
 %define		qtver		5.9.0
 %define		kfname		kdnssd
 
 Summary:	Network service discovery using Zeroconf
 Name:		kf5-%{kfname}
-Version:	5.90.0
+Version:	5.91.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
-# Source0-md5:	d6795523496bbfc3c6d403c0777e4e08
+# Source0-md5:	4a39910f9fffa41bf636108046d11a62
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5DBus-devel >= %{qtver}
@@ -77,12 +77,11 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{kfname}5_qt.lang
 %defattr(644,root,root,755)
 %doc README.md
-%attr(755,root,root) %ghost %{_libdir}/libKF5DNSSD.so.5
+%ghost %{_libdir}/libKF5DNSSD.so.5
 %attr(755,root,root) %{_libdir}/libKF5DNSSD.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/KF5/kdnssd_version.h
 %{_includedir}/KF5/KDNSSD
 %{_libdir}/cmake/KF5DNSSD
 %{_libdir}/libKF5DNSSD.so
