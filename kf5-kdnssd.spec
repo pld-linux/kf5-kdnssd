@@ -3,18 +3,18 @@
 %bcond_with	tests		# build with tests
 # TODO:
 # - runtime Requires if any
-%define		kdeframever	5.108
+%define		kdeframever	5.109
 %define		qtver		5.15.2
 %define		kfname		kdnssd
 
 Summary:	Network service discovery using Zeroconf
 Name:		kf5-%{kfname}
-Version:	5.108.0
+Version:	5.109.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
-# Source0-md5:	ec588b4d634032912a094b586a0052b0
+# Source0-md5:	993090bb9a0e678154382daa0626fa48
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5DBus-devel >= %{qtver}
@@ -24,7 +24,7 @@ BuildRequires:	Qt5Test-devel >= %{qtver}
 BuildRequires:	Qt5Widgets-devel >= %{qtver}
 BuildRequires:	Qt5Xml-devel >= %{qtver}
 BuildRequires:	avahi-devel
-BuildRequires:	cmake >= 2.8.12
+BuildRequires:	cmake >= 3.16
 BuildRequires:	kf5-extra-cmake-modules >= 1.4.0
 BuildRequires:	ninja
 BuildRequires:	qt5-linguist >= %{qtver}
@@ -58,16 +58,15 @@ Pliki nagłówkowe dla programistów używających %{kfname}.
 %setup -q -n %{kfname}-%{version}
 
 %build
-install -d build
-cd build
-%cmake -G Ninja \
+%cmake -B build \
+	-G Ninja \
 	%{!?with_tests:-DBUILD_TESTING=OFF} \
-	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
-	../
-%ninja_build
+	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON
+
+%ninja_build -C build
 
 %if %{with tests}
-ctest
+%ninja_build -C build test
 %endif
 
 
