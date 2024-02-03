@@ -3,38 +3,38 @@
 %bcond_with	tests		# build with tests
 # TODO:
 # - runtime Requires if any
-%define		kdeframever	5.114
+%define		kdeframever	5.249.0
 %define		qtver		5.15.2
 %define		kfname		kdnssd
 
 Summary:	Network service discovery using Zeroconf
 Name:		kf5-%{kfname}
-Version:	5.114.0
-Release:	1
+Version:	5.249.0
+Release:	0.1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
-Source0:	https://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
-# Source0-md5:	6c133399c71aaa4fa8aae3bd62016bfd
+Source0:	https://download.kde.org/unstable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
+# Source0-md5:	db5789390eeb3e941c63fede5c51688f
 URL:		http://www.kde.org/
-BuildRequires:	Qt5Core-devel >= %{qtver}
-BuildRequires:	Qt5DBus-devel >= %{qtver}
-BuildRequires:	Qt5Gui-devel >= %{qtver}
-BuildRequires:	Qt5Network-devel >= %{qtver}
-BuildRequires:	Qt5Test-devel >= %{qtver}
-BuildRequires:	Qt5Widgets-devel >= %{qtver}
-BuildRequires:	Qt5Xml-devel >= %{qtver}
+BuildRequires:	Qt6Core-devel >= %{qtver}
+BuildRequires:	Qt6DBus-devel >= %{qtver}
+BuildRequires:	Qt6Gui-devel >= %{qtver}
+BuildRequires:	Qt6Network-devel >= %{qtver}
+BuildRequires:	Qt6Test-devel >= %{qtver}
+BuildRequires:	Qt6Widgets-devel >= %{qtver}
+BuildRequires:	Qt6Xml-devel >= %{qtver}
 BuildRequires:	avahi-devel
 BuildRequires:	cmake >= 3.16
 BuildRequires:	kf5-extra-cmake-modules >= 1.4.0
 BuildRequires:	ninja
-BuildRequires:	qt5-linguist >= %{qtver}
+BuildRequires:	qt6-linguist >= %{qtver}
 BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	kf5-dirs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		qt5dir		%{_libdir}/qt5
+%define		qt6dir		%{_libdir}/qt6
 
 %description
 KDNSSD is a library for handling the DNS-based Service Discovery
@@ -74,7 +74,7 @@ Pliki nagłówkowe dla programistów używających %{kfname}.
 rm -rf $RPM_BUILD_ROOT
 %ninja_install -C build
 
-%find_lang %{kfname}5_qt --with-qm --all-name --with-kde
+%find_lang %{kfname}6_qt --with-qm --all-name --with-kde
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -82,15 +82,14 @@ rm -rf $RPM_BUILD_ROOT
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-%files -f %{kfname}5_qt.lang
+%files -f %{kfname}6_qt.lang
 %defattr(644,root,root,755)
 %doc README.md
-%ghost %{_libdir}/libKF5DNSSD.so.5
-%attr(755,root,root) %{_libdir}/libKF5DNSSD.so.*.*
+%ghost %{_libdir}/libKF6DNSSD.so.6
+%attr(755,root,root) %{_libdir}/libKF6DNSSD.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/KF5/KDNSSD
-%{_libdir}/cmake/KF5DNSSD
-%{_libdir}/libKF5DNSSD.so
-%{qt5dir}/mkspecs/modules/qt_KDNSSD.pri
+%{_includedir}/KF6/KDNSSD
+%{_libdir}/cmake/KF6DNSSD
+%{_libdir}/libKF6DNSSD.so
